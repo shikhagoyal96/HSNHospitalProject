@@ -1,0 +1,41 @@
+﻿@model List<HSNHospitalProject.Models.Services>
+@{
+    ViewBag.Title = "Create";
+}
+<!--the logged-in user can add a feedback by selecting service-->
+<div style="margin-top:3em;margin-left:3em;">
+    <h5 style="font-weight:bold;">ADD FEEDBACK</h5>
+    <br />
+    <form action="/Userfeedback/Create" method="post">
+        <div class="form-group">
+            <label for="servicesId">Services Name:</label>
+            <select id="servicesId" type="text" name="servicesId" class="form-control">
+                @{
+                    foreach (var services in Model)
+                    {
+                        <option value="@services.servicesId">@services.servicesName</option>
+                    }
+                }
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="userfeedbackEmail">Email:</label>
+            <input type="text" id="userfeedbackEmail" name="userfeedbackEmail" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="userfeedbackMsg">Feedback:</label>
+            <input type="text" id="userfeedbackMsg" name="userfeedbackMsg" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" value="Add" class="btn btn-primary" oclick="submitmsg()">ADD</button>
+        </div>
+    </form>
+</div>
+
+
+
+

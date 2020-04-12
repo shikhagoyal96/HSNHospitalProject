@@ -1,0 +1,40 @@
+﻿@model HSNHospitalProject.Models.Userfeedback
+
+@{
+    ViewBag.Title = "Show";
+}
+    <div style="margin-top:3em;margin-left:3em;">
+        <h4 style="font-weight:bold;">Feedback details of id : #@Model.userfeedbackId</h4>
+
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="userfeedbackEmail">Email-Address</label>
+                <input type="text" readonly class="form-control" id="userfeedbackEmail" value="@Model.userfeedbackEmail" />
+            </div>
+        </form><br />
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="userfeedbackMsg">Feedback-Message</label>
+                <input type="text" readonly class="form-control" id="userfeedbackMsg" value="@Model.userfeedbackMsg" />
+            </div>
+        </form><br />
+
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="serviceName">Services</label>
+                <input type="text" readonly class="form-control" id="serviceName" value="@Model.Services.servicesName" />
+            </div>
+        </form><br />
+
+               <div><!--the admin can update the feedback message of the user-->
+                   <a href="/Userfeedback/Edit/@Model.userfeedbackId" style="margin-left:1em" class="btn btn-warning">UPDATE</a>
+                   <!--if the admin wants he can post the good feedback on the home page or can send the bad feedbacks to the
+                 appropriate department for improving-->
+                   <a href="" style="margin-left:1em" class="btn btn-success">POST</a>
+                   <p style="color:red; font-weight:bold">* Please click on Update button to make changes</p>
+               </div>
+
+    </div>
+
+
+

@@ -1,0 +1,61 @@
+﻿@model List<HSNHospitalProject.Models.Feedback>
+@{
+    ViewBag.Title = "Details";
+}
+    <div style="margin-top:3em;margin-left:3em;">
+        <h4 style="font-weight:bold;">List of FEEDBACKS given by our PATIENTS</h4>
+        <h4 style="font-weight:bold;">Click on the email-address to either view or update a particular feedback.</h4>
+        <!--pagination-->
+        <div class="paginate">
+            @{
+                <a href="/Feedback/Details?pagenum=@((int)ViewData["pagenum"]-1)&userfeedbackkey=@ViewData["faqsearchkey"]" class="btn btn-info">Prev</a>
+                @ViewData["pagesummary"]
+                <a href="/Feedback/Details?pagenum=@((int)ViewData["pagenum"]+1)&userfeedbackkey=@ViewData["faqsearchkey"]" style="margin-left:70em" class="btn btn-info">Next</a>
+            }
+        </div>
+        <!--search bar-->
+        <form action="/Feedback/Details" method="GET" style="margin-top:2em;margin-left:15em">
+            <label for="searchkey" style="color:red">Please enter the email-address You want to search..</label>
+            <input type="text" name="userfeedbackkey" id="userfeedbackkey" />
+            <input type="submit" value="Search" class="btn btn-info" />
+        </form>
+        <!--displaying data in table format-->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Email-Address</th>
+                    <th scope="col">Feedback-Message</th>
+                    <th scope="col">DELETE</th>
+                    <th scope="col">POST</th>
+                </tr>
+            </thead>
+            <tbody style="top:2em;">
+                @{
+                    foreach (var feedback in Model)
+                    {
+                        <tr>
+                            <td>
+                                @feedback.feedbackId<!--feedback id-->
+                            </td>
+                            <td>
+                                <a href="/Feedback/Show/@feedback.feedbackId">@feedback.feedbackEmail</a><!--user email-->
+                            </td>
+                            <td>
+                                @feedback.feedbackMsg<!--feedback message-->
+                            </td>
+                            <td><!--admin can delete the feedback-->
+                                <a href="/Feedback/Delete/@feedback.feedbackId" class="btn btn-danger">DELETE</a>
+                            </td>
+                            <td>
+                                <!--admin can post the feedback-->
+                                <a href="/Feedback/postMsg/@feedback.feedbackId" class="btn btn-success">POST</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+

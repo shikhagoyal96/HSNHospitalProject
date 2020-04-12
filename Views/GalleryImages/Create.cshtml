@@ -1,0 +1,84 @@
+﻿@model HSNHospitalProject.Models.GalleryImages
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add a New Image</h2>
+
+
+<form action="" method="post" enctype="multipart/form-data">
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="galleryImagesTitle">Image Title: </label>
+                <div>
+                    <input type="text" name="galleryImagesTitle" id="galleryImagesTitle" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="galleryImageFile">Image: </label>
+            <div>
+                <input type="file" accept="image/*" name="galleryImageFile" id="galleryImageFile" class="form-control-file" onchange="loadFile(event)" />
+            </div>
+        </div>
+        <div>
+            <!--Uploaded image will be printed here-->
+            <img id="output" class="" style="max-width:50%" />
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="galleryImageAlt">Image Alt Text: </label>
+                <div>
+                    <input type="text" name="galleryImageAlt" id="galleryImageAlt" class="form-control" />
+                </div>
+                <p><small><em>This text will be read for screen reading software users, or if the image fails to load.</em></small></p>
+
+            </div>
+        </div>
+
+        <!--Date posted will be today's date-->
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="galleryImagesDescription">Image Description: </label>
+                <div>
+                    <textarea rows="3" name="galleryImagesDescription" id="galleryImagesDescription" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<!--code below from stack overflow - https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded-->
+<script>
+    /**
+     * This function takes the image file that was uploaded and displays it in the div with the id 'output'
+     */
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

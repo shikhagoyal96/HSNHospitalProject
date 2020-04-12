@@ -1,0 +1,29 @@
+﻿@model HSNHospitalProject.Models.Feedback
+
+@{
+    ViewBag.Title = "Show";
+}
+    <div style="margin-top:3em;margin-left:3em;">
+        <h4 style="font-weight:bold;">Feedback details of id : #@Model.feedbackId</h4>
+
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="feedbackEmail">Email-Address</label>
+                <input type="text" readonly class="form-control" id="feedbackEmail" value="@Model.feedbackEmail" />
+            </div>
+        </form><br />
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="feedbackEmail">Feedback-Message</label>
+                <input type="text" readonly class="form-control" id="feedbackEmail" value="@Model.feedbackMsg" />
+            </div>
+        </form><br />
+
+               <div>
+                   <a href="/Feedback/Edit/@Model.feedbackId" style="margin-left:1em" class="btn btn-warning">UPDATE</a>
+                   <a href="" style="margin-left:1em" class="btn btn-primary">POST</a>
+                   <p style="color:red; font-weight:bold">* Please click on Update button to make changes</p>
+               </div>
+        
+    </div>
+

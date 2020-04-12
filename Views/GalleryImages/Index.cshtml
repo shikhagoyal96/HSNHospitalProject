@@ -1,0 +1,86 @@
+﻿@model PagedList.IPagedList<HSNHospitalProject.Models.GalleryImages>
+<!--model IEnumerable<HSNHospitalProject.Models.GalleryImages>-->
+@using PagedList.Mvc;
+<!--Pagination used from asp.net tutorial - https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/sorting-filtering-and-paging-with-the-entity-framework-in-an-asp-net-mvc-application#add-paging-->
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Image Gallery</h2>
+
+<!--Alert box indicating if image was added, edited or deleted-->
+@if (!String.IsNullOrEmpty(Request["add"]) && Request["add"].Equals("True"))
+{
+    <div class="alert alert-success">Image successfully added.</div>
+}
+else if (!String.IsNullOrEmpty(Request["delete"]) && Request["delete"].Equals("True"))
+{
+    <div class="alert alert-success">Image successfully deleted.</div>
+}
+else if (!String.IsNullOrEmpty(Request["update"]) && Request["update"].Equals("True"))
+{
+    <div class="alert alert-success">Image successfully updated.</div>
+}
+
+@if ((bool)TempData["isAdmin"] == true)
+{
+    <p>
+        <a class="btn btn-primary" href="@Url.Action("Create")">Add New Image</a>
+    </p>
+}
+
+
+<div class="row">
+    @foreach (var image in Model)
+    {
+        <div class="col-md-2">
+            <div class="panel panel-default" onclick="showDetails(@image.galleryimageid);" style="cursor:pointer;">
+                <div class="panel-body" style="padding:0; height: 15vh;">
+                    <img class="" src="~/Content/GalleryImages/@image.galleryimageref" style="width:100%; height:100%; object-fit: cover" alt="@image.galleryimagealt" />
+                </div>
+                <div class="panel-footer">@image.galleryimagetitle</div>
+            </div>
+        </div>
+
+    }
+</div>
+<div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div id="imageDetails">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /**
+     * This function does an ajax call to print image information to a hidden modal window, and then has that modal window appear.
+     */
+    function showDetails(id) {
+        $.ajax({
+            url: '@Url.Action("showDetails")',
+            //type: 'GET',
+            type: 'POST',
+            cache: false,
+            data: { galleryimagesid : id }
+        }).done(function (result) {
+            //output will be printed to the inside of the modal window
+            $('#imageDetails').html(result);
+        });
+        //activate the script that calls the Modal window appear
+        $("#exampleModalCenter").modal()
+    }
+
+</script>

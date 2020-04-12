@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<!--Loading the graph generator script-->
+<!--<script type="text/javascript" src="~/Scripts/GraphGenerator.js"></script>-->
+
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+
+</div>
+<!--The script returned from the partial view that begins drawing the graph will be printed in the below div-->
+<!--The canvas will be put into the below div below, and the graph will draw to that canvas-->
+<div id="graphScript" class="flex-container">
+    <div class="loader" id="loader"></div>
+</div>
+<div>
+    <canvas id=""><!--This canvas is no longer used-->
+    </canvas>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery") @*ASP loads bundle scripts in the layout after the body, so load it here to use jQuery on window.onload before that is able to load*@
+    <script>
+        $(document).ready(startGraphGeneration());
+
+        /**
+         * Sam Bebenek -
+         * This function does an ajax call to start grabbing info from the db to start generating the activity graph and print it to the page. This will be called
+         * only once the page is loaded, so that users won't have to wait for the graph to load before seeing the rest of the page.
+         */
+        function startGraphGeneration() {
+            $.ajax({
+                url: '@Url.Action("startGraph")',
+                //type: 'GET',
+                type: 'POST',
+                cache: false,
+                data: { submit: true }
+            }).done(function (result) {
+                //remove the loader icon
+                $("#loader").remove();
+                //output will be printed to the cavnas
+                $('#graphScript').html(result);
+            });
+            console.log("startGraph jQuery AJAX was called");
+        }
+    </script>
+}
+
+<!--<div>
+    <h2>FEEDBACK:</h2>
+    <input type="text" readonly class="form-control" id="userfeedbackMsg" value="Model.userfeedbackMsg" /><br />
+</div>-->

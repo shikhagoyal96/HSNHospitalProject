@@ -1,0 +1,49 @@
+﻿@model List<HSNHospitalProject.Models.Department>
+@{
+    ViewBag.Title = "Create";
+}
+
+<!--Here the admin can create a new faq for a department by filling the necessary details-->
+<div style="margin-top:3em;margin-left:3em;">
+    <h5 style="font-weight:bold;">ADD A NEW FAQ</h5>
+    <br />
+    <form action="/Faq/Create" method="post">
+        <div class="form-group">
+            <label for="departmentId">Department Name:</label>
+            <select id="departmentId" type="text" name="departmentId" class="form-control">
+                @{
+                    foreach (var deparments in Model)
+                    {
+                        <option value="@deparments.departmentId">@deparments.departmentName</option>
+                    }
+                }
+            </select>
+        </div>
+        
+
+        <div class="form-group">
+            <label for="faqQuestion">Question:</label>
+            <input type="text" id="faqQuestion" name="faqQuestion" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="faqAnswer">Answer:</label>
+            <input type="text" id="usfaqAnswer" name="faqAnswer" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" value="Add" class="btn btn-primary" oclick="submitmsg()">ADD</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+

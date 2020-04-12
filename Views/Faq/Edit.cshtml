@@ -1,0 +1,27 @@
+﻿@model HSNHospitalProject.Models.Faq
+@{
+    ViewBag.Title = "Edit";
+}
+
+<!--This page allows the admin to to make changes on the selected faq-->
+<div style="margin-top:3em;margin-left:3em;">
+    <h3 style="font-weight:bold;">You can make changes in the both Question and Answer</h3>
+
+    <form method="post" action="/Faq/Edit/@Model.faqId">
+        <div>
+            <input type="hidden" id="faqId" name="faqId" value="@Model.faqId" />
+        </div>
+
+        <div class="form-group">
+            <label for="faqQuestion">Question:</label>
+            <input type="text" class="form-control"  name="faqQuestion" id="faqQuestion" value="@Model.faqQuestion" />
+        </div>
+        <div class="form-group">
+            <label for="faqAnswer">Answer:</label>
+            <input type="text" class="form-control"  name="faqAnswer" id="faqAnswer" value="@Model.faqAnswer" />
+        </div>
+        <div>
+            <input type="submit" value="UPDATE" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

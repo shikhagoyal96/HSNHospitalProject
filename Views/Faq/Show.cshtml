@@ -1,0 +1,35 @@
+﻿@model HSNHospitalProject.Models.Faq
+@{
+    ViewBag.Title = "Show";
+}
+<!--This page will show the details of a selected faq-->
+<div style="margin-top:3em;margin-left:3em;">
+    <h4 style="font-weight:bold;">FAQ details of id : #@Model.faqId</h4>
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="faqQuestion">Question:</label>
+            <input type="text" readonly class="form-control" id="faqQuestion" value="@Model.faqQuestion" />
+        </div>
+    </form><br />
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="faqAnswer">Answer:</label>
+            <input type="text" readonly class="form-control" id="faqAnswer" value="@Model.faqAnswer" />
+        </div>
+    </form><br />
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="departmentName">Department:</label>
+            <input type="text" readonly class="form-control" id="departmentName" value="@Model.Departments.departmentName" />
+        </div>
+    </form><br />
+
+    <div>
+        <a href="/Faq/Edit/@Model.faqId" style="margin-left:1em" class="btn btn-warning">UPDATE</a>
+        <p style="color:red; font-weight:bold">* Please click on Update button to make changes</p>
+    </div>
+
+</div>
+

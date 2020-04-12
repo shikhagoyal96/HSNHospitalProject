@@ -1,0 +1,32 @@
+﻿@model List<HSNHospitalProject.Models.Feedback>
+@{
+    ViewBag.Title = "Create";
+}
+    <div style="margin-top:3em;margin-left:3em;">
+        <h5 style="font-weight:bold;">Please enter the required details in the empty fields below.</h5>
+        <h5 style="font-weight:bold;">As your feedback is valuable to improve the quality of services we provide to our patients.</h5>
+
+        <form action="/Feedback/Create" method="post">
+            <div class="form-group">
+                <label for="feedbackEmail">Email:</label>
+                <input type="text" id="feedbackEmail" name="feedbackEmail" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="feedbackMsg">Feedback:</label>
+                <input type="text" id="feedbackMsg" name="feedbackMsg" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" value="Add" class="btn btn-primary" oclick="submitmsg()">ADD</button>
+            </div>
+        </form>
+    </div>
+
+<script type="text/javascript">
+    function submitmsg() {
+        alert("feeback submited successfully..");
+    }
+</script>
+
+

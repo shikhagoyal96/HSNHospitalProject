@@ -1,0 +1,72 @@
+﻿@model List<HSNHospitalProject.Models.Faq>
+@{
+    ViewBag.Title = "Details";
+}
+
+    <div style="margin-top:3em;margin-left:3em;">
+        <h4 style="font-weight:bold;text-align:center">List of Frequently Asked Questions</h4>
+
+        <!--helps in navigating to next page because it can only display 3 details on one page-->
+        <div class="paginate">
+            @{
+                <a href="/Faq/Details?pagenum=@((int)ViewData["pagenum"]-1)&faqsearchkey=@ViewData["faqsearchkey"]" class="btn btn-info">Prev</a>
+                @ViewData["pagesummary"]
+                <a href="/Faq/Details?pagenum=@((int)ViewData["pagenum"]+1)&faqsearchkey=@ViewData["faqsearchkey"]" style="margin-left:70em" class="btn btn-info">Next</a>
+            }
+        </div>
+        <!--The admin can sort the list of faqs by inserting the question he want to search
+        alternatively he could search the list based on departments
+        -->
+        <form action="/Faq/Details" method="GET" style="margin-top:2em;margin-left:15em">
+            <label for="searchkey" style="color:red">Please enter the question You want to search..</label>
+            <input type="text" name="faqsearchkey" id="faqsearchkey" />
+            <input type="submit" value="Search" class="btn btn-info" />
+        </form>
+        <!--Displaying the data in a table format-->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Answer</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">DELETE</th>
+
+                </tr>
+            </thead>
+            <tbody style="top:2em;">
+                @{
+                    foreach (var faq in Model)
+                    {
+                        <tr>
+                            <td>
+                                @faq.faqId<!--Faq Id-->
+                            </td>
+                            <td>
+                                <a href="/Faq/Show/@faq.faqId">@faq.faqQuestion</a><!--Faq question-->
+                            </td>
+                            <td>
+                                @faq.faqAnswer<!--Faq Answer-->
+                            </td>
+                            <td>
+                                @faq.Departments.departmentName<!--department name-->
+                            </td>
+                            <!--Admin can delete the details-->
+                            <td>
+                                <a href="/Faq/Delete/@faq.faqId" class="btn btn-danger">DELETE</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <!--Admin can add the details-->
+        <div>
+            <div class="form-group" style="margin-left:30em">
+                <a href="/Faq/Create" class="btn btn-primary">ADD NEW FAQ</a>
+            </div>
+        </div>
+    </div>
+
+
+      
