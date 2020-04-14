@@ -27,6 +27,7 @@
    foreign key - servicesId(services table)<br/>
    relationship - one service to many userfeedback<br/>
    extra - search and pagination<br/>
+   Linq - Used<br/>
    
 <h4>Rest of the features was done by my other team members.</h4>
 
