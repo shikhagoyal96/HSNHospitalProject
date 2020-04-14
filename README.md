@@ -9,7 +9,13 @@
    views - Details, DetailsUser, Edit, Show, Create<br/>
    foreign key - departmentId(department table)<br/>
    
-2. Userfeedback <br/>
+2. Feedback <br/>
+   model - Feedback.cs<br/>
+   controller - FeedbackController<br/>
+   views - Details, Edit, Show, Create<br/>
+   foreign key - none<br/>
+   
+3. Userfeedback <h4>* Its is the improved version of the above feedback model as it involves the usage of foriegn key and viewmodel </h4><br/>
    model - Userfeedback.cs<br/>
    viewmodel - UpdateUserfeedback.cs<br/>
    controller - UserfeedbackController<br/>
